@@ -38,6 +38,14 @@ public class CustomBookStorage {
         return result;
     }
 
+    public boolean deleteBook(CustomBook book) {
+        return books.remove(book);
+    }
+
+    public int size() {
+        return books.size();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

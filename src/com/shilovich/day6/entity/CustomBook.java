@@ -92,7 +92,7 @@ public class CustomBook {
         sb.append(", title='").append(title).append('\'');
         sb.append(", date=").append(year);
         sb.append(", price=").append(price);
-        sb.append('}');
+        sb.append('}').append(System.lineSeparator());
         return sb.toString();
     }
 }
