@@ -1,9 +1,11 @@
-package com.shilovich.day6.entity;
+package com.shilovich.day6.model.entity;
 
 import java.util.List;
 
 public class CustomBookStorage {
+    private static final int STORAGE_CAPACITY = 100;
     private static CustomBookStorage instance;
+
     private List<CustomBook> books;
 
     private CustomBookStorage() {
@@ -22,7 +24,7 @@ public class CustomBookStorage {
 
     public boolean setBook(CustomBook book) {
         boolean result = false;
-        if (book != null) {
+        if (book != null && books.size() < STORAGE_CAPACITY) {
             this.books.add(book);
             result = true;
         }
@@ -31,34 +33,19 @@ public class CustomBookStorage {
 
     public boolean setBooks(List<CustomBook> books) {
         boolean result = false;
-        if (!books.isEmpty()) {
+        if (!books.isEmpty() && books.size() <= STORAGE_CAPACITY) {
             this.books = books;
             result = true;
         }
         return result;
     }
 
-    public boolean deleteBook(CustomBook book) {
-        return books.remove(book);
+    public boolean deleteBook(int index) {
+        return books.remove(getBook(index));
     }
 
     public int size() {
         return books.size();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CustomBookStorage)) return false;
-
-        CustomBookStorage that = (CustomBookStorage) o;
-
-        return books.equals(that.books);
-    }
-
-    @Override
-    public int hashCode() {
-        return books != null ? books.hashCode() : 0;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.shilovich.day6.exception;
+package com.shilovich.day6.model.exception;
 
 public class CustomBookReaderException extends Exception {
     public CustomBookReaderException() {

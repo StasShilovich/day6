@@ -1,4 +1,4 @@
-package com.shilovich.day6.entity;
+package com.shilovich.day6.model.entity;
 
 import java.math.BigDecimal;
 

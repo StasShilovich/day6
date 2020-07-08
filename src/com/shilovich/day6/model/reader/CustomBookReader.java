@@ -1,6 +1,6 @@
-package com.shilovich.day6.reader;
+package com.shilovich.day6.model.reader;
 
-import com.shilovich.day6.exception.CustomBookReaderException;
+import com.shilovich.day6.model.exception.CustomBookReaderException;
 
 import java.io.IOException;
 import java.nio.file.Files;

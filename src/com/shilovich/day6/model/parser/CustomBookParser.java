@@ -1,6 +1,6 @@
-package com.shilovich.day6.parser;
+package com.shilovich.day6.model.parser;
 
-import com.shilovich.day6.entity.CustomBook;
+import com.shilovich.day6.model.entity.CustomBook;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
