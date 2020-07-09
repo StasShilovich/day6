@@ -1,5 +1,7 @@
 package com.shilovich.day6.model.entity;
 
+import com.shilovich.day6.model.creator.CustomBookStorageCreator;
+
 import java.util.List;
 
 public class CustomBookStorage {
@@ -13,9 +15,22 @@ public class CustomBookStorage {
 
     public static CustomBookStorage getInstance() {
         if (instance == null) {
-            instance = new CustomBookStorage();
+            instance = CustomBookDefaultStorage();
         }
         return instance;
+    }
+
+    private static CustomBookStorage CustomBookDefaultStorage() {
+        CustomBookStorageCreator creator = new CustomBookStorageCreator();
+        List<CustomBook> customBooks = creator.create();
+        CustomBookStorage storage = new CustomBookStorage();
+        boolean isStorageFilled = storage.setBooks(customBooks);
+        if (isStorageFilled) {
+            System.out.println("Storage filled with books!");
+        } else {
+            System.out.println("Storage not filled with books. Books list is empty!");
+        }
+        return storage;
     }
 
     public CustomBook getBook(int index) {

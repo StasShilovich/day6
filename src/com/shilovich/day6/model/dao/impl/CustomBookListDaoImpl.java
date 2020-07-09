@@ -14,15 +14,12 @@ import java.util.List;
 public class CustomBookListDaoImpl implements CustomBookListDao {
     private static CustomBookListDaoImpl instance;
 
-    private final CustomBookStorage storage;
-
-    private CustomBookListDaoImpl(CustomBookStorage storage) {
-        this.storage = storage;
+    private CustomBookListDaoImpl() {
     }
 
-    public static CustomBookListDaoImpl getInstance(CustomBookStorage storage) {
+    public static CustomBookListDaoImpl getInstance() {
         if (instance == null) {
-            return new CustomBookListDaoImpl(storage);
+            return new CustomBookListDaoImpl();
         }
         return instance;
     }
@@ -73,6 +70,7 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
 
     @Override
     public List<CustomBook> sortBookByTag() {
+        CustomBookStorage storage = CustomBookStorage.getInstance();
         List<CustomBook> result = new ArrayList<>();
         for (int i = 0; i < storage.size(); i++) {
             CustomBook book = storage.getBook(i);
