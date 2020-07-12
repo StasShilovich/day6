@@ -1,5 +1,6 @@
-package com.shilovich.day6.controller;
+package com.shilovich.day6.service;
 
+import com.shilovich.day6.controller.InvokeController;
 import com.shilovich.day6.model.dao.CustomBookListDao;
 import com.shilovich.day6.model.dao.impl.CustomBookListDaoImpl;
 import com.shilovich.day6.model.entity.CustomBook;
@@ -7,15 +8,15 @@ import com.shilovich.day6.model.exception.CustomBookCRUDException;
 
 import java.util.List;
 
-public class CustomBookStorageController {
-    private static CustomBookStorageController instance;
+public class CustomBookService {
+    private static CustomBookService instance;
 
-    private CustomBookStorageController() {
+    private CustomBookService() {
     }
 
-    public static CustomBookStorageController getInstance() {
+    public static CustomBookService getInstance() {
         if (instance == null) {
-            return new CustomBookStorageController();
+            return new CustomBookService();
         }
         return instance;
     }
