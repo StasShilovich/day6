@@ -1,7 +1,7 @@
-package com.shilovich.day6.controller;
+package com.shilovich.day6.controller.invoker;
 
 import com.shilovich.day6.controller.command.ActionCommand;
-import com.shilovich.day6.controller.command.ActionFactory;
+import com.shilovich.day6.controller.provider.ActionProvider;
 
 import java.util.Map;
 
@@ -19,8 +19,8 @@ public class InvokeController {
     }
 
     public Map processRequest(String command, Map<String, String> params) {
-        ActionFactory factory = new ActionFactory();
-        ActionCommand actionCommand = factory.defineCommand(command);
+        ActionProvider provider = new ActionProvider();
+        ActionCommand actionCommand = provider.defineCommand(command);
         return actionCommand.execute(params);
     }
 }

@@ -1,11 +1,10 @@
-package com.shilovich.day6.controller.command;
+package com.shilovich.day6.controller.command.type;
 
+import com.shilovich.day6.controller.command.ActionCommand;
 import com.shilovich.day6.controller.command.impl.AddBookCommand;
 import com.shilovich.day6.controller.command.impl.FindByTagCommand;
 import com.shilovich.day6.controller.command.impl.RemoveBookCommand;
 import com.shilovich.day6.controller.command.impl.SortingByTagCommand;
-
-import java.util.Map;
 
 public enum CommandType {
     FIND_BY_TAG {

@@ -3,8 +3,7 @@ package com.shilovich.day6.model.dao.impl;
 import com.shilovich.day6.model.entity.CustomBook;
 import com.shilovich.day6.model.entity.CustomBookStorage;
 import com.shilovich.day6.model.dao.CustomBookListDao;
-import com.shilovich.day6.model.exception.CustomBookCRUDException;
-import com.shilovich.day6.model.validator.CustomBookValidator;
+import com.shilovich.day6.service.exception.CustomBookValidationException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,33 +24,21 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
     }
 
     @Override
-    public void addBook(CustomBook book) throws CustomBookCRUDException {
-        CustomBookValidator validator = new CustomBookValidator();
-        if (!validator.validateCustomBook(book)) {
-            throw new CustomBookCRUDException("Book is not valid!");
+    public void addBook(CustomBook book) {
+        if (findCustomBookIndex(book) == -1) {
+            CustomBookStorage.getInstance().setBook(book);
+        } else {
+            System.out.println("Book is already exist!");
         }
-        if (findCustomBookIndex(book) != -1) {
-            throw new CustomBookCRUDException("Book is already exist!");
-        }
-        CustomBookStorage.getInstance().setBook(book);
     }
 
     @Override
-    public void removeBook(CustomBook book) throws CustomBookCRUDException {
-        CustomBookValidator validator = new CustomBookValidator();
-        if (!validator.validateCustomBook(book)) {
-            throw new CustomBookCRUDException("Book is not valid!");
-        }
+    public void removeBook(CustomBook book) throws CustomBookValidationException {
         CustomBookStorage.getInstance().deleteBook(findCustomBookIndex(book));
     }
 
     @Override
     public CustomBook findByTag(int tag) {
-        CustomBookValidator validator = new CustomBookValidator();
-        if (!validator.validateTag(tag)) {
-            System.out.println("Tag is not valid!");
-            return new CustomBook();
-        }
         CustomBook result = new CustomBook();
         boolean isExist = false;
         int size = CustomBookStorage.getInstance().size();
@@ -96,5 +83,4 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
         }
         return index;
     }
-
 }

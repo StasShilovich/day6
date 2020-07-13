@@ -1,4 +1,4 @@
-package com.shilovich.day6.model.validator;
+package com.shilovich.day6.validator;
 
 import com.shilovich.day6.model.entity.CustomBook;
 

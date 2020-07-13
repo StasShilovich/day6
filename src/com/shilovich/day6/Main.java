@@ -1,6 +1,6 @@
 package com.shilovich.day6;
 
-import com.shilovich.day6.controller.InvokeController;
+import com.shilovich.day6.controller.invoker.InvokeController;
 import com.shilovich.day6.model.entity.CustomBook;
 
 import java.math.BigDecimal;
@@ -13,6 +13,6 @@ public class Main {
         CustomBook book = new CustomBook(47966, "W.G. Sebald", "Vertigo", 1990, new BigDecimal(9.49, MathContext.DECIMAL64));
         InvokeController controller = InvokeController.getInstance();
         Map map = controller.processRequest("sort_by_tag", new HashMap<>());
-        System.out.println(map.get("Books").toString());
+        System.out.println(map);
     }
 }
