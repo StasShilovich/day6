@@ -3,19 +3,18 @@ package com.shilovich.day6.controller.provider;
 import com.shilovich.day6.controller.command.ActionCommand;
 import com.shilovich.day6.controller.command.type.CommandType;
 import com.shilovich.day6.controller.command.impl.EmptyCommand;
+import com.shilovich.day6.exception.ControllerException;
 
-public class ActionProvider {
-    public ActionCommand defineCommand(String command) {
-        ActionCommand current = new EmptyCommand();
+public class ActionProvider<A, T, K> {
+    public ActionCommand<A, T, K> defineCommand(String command) throws ControllerException {
         if (command.isEmpty()) {
-            return current;
+            return new EmptyCommand();
         }
         try {
             CommandType currentEnum = CommandType.valueOf(command.toUpperCase());
-            current = currentEnum.getCommand();
+            return currentEnum.getCommand();
         } catch (IllegalArgumentException e) {
-            System.out.println("Command name is invalid: " + command);
+            throw new ControllerException("Command name is invalid: " + command);
         }
-        return current;
     }
 }

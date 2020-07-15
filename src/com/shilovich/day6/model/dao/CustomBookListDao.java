@@ -1,16 +1,16 @@
 package com.shilovich.day6.model.dao;
 
+import com.shilovich.day6.exception.DaoException;
 import com.shilovich.day6.model.entity.CustomBook;
-import com.shilovich.day6.service.exception.CustomBookValidationException;
 
 import java.util.List;
 
 public interface CustomBookListDao {
-    void addBook(CustomBook book) throws CustomBookValidationException;
+    void addBook(CustomBook book) throws DaoException;
 
-    void removeBook(CustomBook book) throws CustomBookValidationException;
+    void removeBook(CustomBook book) throws DaoException;
 
-    CustomBook findByTag(int tag);
+    CustomBook findByTag(int tag) throws DaoException;
 
-    List<CustomBook> sortBookByTag();
+    List<CustomBook> sortBookByTag() throws DaoException;
 }

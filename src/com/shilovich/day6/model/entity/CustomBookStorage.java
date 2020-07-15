@@ -39,7 +39,7 @@ public class CustomBookStorage {
 
     public boolean setBook(CustomBook book) {
         boolean result = false;
-        if (book != null && books.size() < STORAGE_CAPACITY) {
+        if (book != null && isEnoughSpace(1)) {
             this.books.add(book);
             result = true;
         }
@@ -48,7 +48,7 @@ public class CustomBookStorage {
 
     public boolean setBooks(List<CustomBook> books) {
         boolean result = false;
-        if (!books.isEmpty() && books.size() <= STORAGE_CAPACITY) {
+        if (!books.isEmpty() && isEnoughSpace(books.size())) {
             this.books = books;
             result = true;
         }
@@ -61,6 +61,10 @@ public class CustomBookStorage {
 
     public int size() {
         return books.size();
+    }
+
+    private boolean isEnoughSpace(int count) {
+        return (STORAGE_CAPACITY - size()) >= count;
     }
 
     @Override

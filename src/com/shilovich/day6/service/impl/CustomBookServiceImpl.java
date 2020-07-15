@@ -1,11 +1,11 @@
 package com.shilovich.day6.service.impl;
 
-import com.shilovich.day6.model.dao.CustomBookListDao;
+import com.shilovich.day6.exception.DaoException;
+import com.shilovich.day6.exception.ServiceException;
 import com.shilovich.day6.model.dao.impl.CustomBookListDaoImpl;
 import com.shilovich.day6.model.entity.CustomBook;
 import com.shilovich.day6.service.CustomBookService;
-import com.shilovich.day6.service.exception.CustomBookValidationException;
-import com.shilovich.day6.validator.CustomBookValidator;
+import com.shilovich.day6.service.validator.CustomBookValidator;
 
 import java.util.List;
 
@@ -22,39 +22,53 @@ public class CustomBookServiceImpl implements CustomBookService {
         return instance;
     }
 
-    public void addBook(CustomBook book) throws CustomBookValidationException {
+    public void addBook(CustomBook book) throws ServiceException {
         CustomBookValidator validator = new CustomBookValidator();
         if (!validator.validateCustomBook(book)) {
-            throw new CustomBookValidationException("Book is not valid!");
+            throw new ServiceException("Book is not valid!");
         }
-        CustomBookListDao dao = CustomBookListDaoImpl.getInstance();
-        dao.addBook(book);
+        try {
+            CustomBookListDaoImpl.getInstance().addBook(book);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
         System.out.println("Book is successfully add!");
     }
 
-    public void removeBook(CustomBook book) throws CustomBookValidationException {
+    public void removeBook(CustomBook book) throws ServiceException {
         CustomBookValidator validator = new CustomBookValidator();
         if (!validator.validateCustomBook(book)) {
-            throw new CustomBookValidationException("Book is not valid!");
+            throw new ServiceException("Book is not valid!");
         }
-        CustomBookListDao dao = CustomBookListDaoImpl.getInstance();
-        dao.removeBook(book);
+        try {
+            CustomBookListDaoImpl.getInstance().removeBook(book);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
         System.out.println("Book is successfully removed!");
     }
 
-    public CustomBook findByTag(int tag) throws CustomBookValidationException {
+    public CustomBook findByTag(int tag) throws ServiceException {
         CustomBookValidator validator = new CustomBookValidator();
         if (!validator.validateTag(tag)) {
-            throw new CustomBookValidationException("Tag is not valid!");
+            throw new ServiceException("Tag is not valid!");
         }
-        CustomBookListDao dao = CustomBookListDaoImpl.getInstance();
-        CustomBook bookByTag = dao.findByTag(tag);
-        return bookByTag;
+        CustomBook book;
+        try {
+            book = CustomBookListDaoImpl.getInstance().findByTag(tag);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+        return book;
     }
 
-    public List<CustomBook> sortBookByTag() {
-        CustomBookListDao dao = CustomBookListDaoImpl.getInstance();
-        List<CustomBook> customBooks = dao.sortBookByTag();
-        return customBooks;
+    public List<CustomBook> sortBookByTag() throws ServiceException {
+        List<CustomBook> books;
+        try {
+            books = CustomBookListDaoImpl.getInstance().sortBookByTag();
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage());
+        }
+        return books;
     }
 }

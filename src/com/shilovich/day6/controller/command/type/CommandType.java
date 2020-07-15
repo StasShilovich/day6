@@ -7,28 +7,16 @@ import com.shilovich.day6.controller.command.impl.RemoveBookCommand;
 import com.shilovich.day6.controller.command.impl.SortingByTagCommand;
 
 public enum CommandType {
-    FIND_BY_TAG {
-        {
-            this.command = new FindByTagCommand();
-        }
-    },
-    SORT_BY_TAG {
-        {
-            this.command = new SortingByTagCommand();
-        }
-    },
-    ADD_BOOK {
-        {
-            this.command = new AddBookCommand();
-        }
-    },
-    REMOVE_BOOK {
-        {
-            this.command = new RemoveBookCommand();
-        }
-    };
+    FIND_BY_TAG(new FindByTagCommand()),
+    SORT_BY_TAG(new SortingByTagCommand()),
+    ADD_BOOK(new AddBookCommand()),
+    REMOVE_BOOK(new RemoveBookCommand());
 
-    ActionCommand command;
+    private CommandType(ActionCommand command) {
+        this.command = command;
+    }
+
+    private ActionCommand command;
 
     public ActionCommand getCommand() {
         return command;
