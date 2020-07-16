@@ -5,7 +5,7 @@ import com.shilovich.day6.exception.ServiceException;
 import com.shilovich.day6.model.dao.impl.CustomBookListDaoImpl;
 import com.shilovich.day6.model.entity.CustomBook;
 import com.shilovich.day6.service.CustomBookService;
-import com.shilovich.day6.service.validator.CustomBookValidator;
+import com.shilovich.day6.validator.CustomBookValidator;
 
 import java.util.List;
 
