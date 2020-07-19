@@ -1,4 +1,4 @@
-package com.shilovich.day6.validator;
+package com.shilovich.day6.model.validator;
 
 import com.shilovich.day6.model.entity.CustomBook;
 
@@ -28,7 +28,7 @@ public class CustomBookValidator {
         return result;
     }
 
-    public boolean validateTag(int tag) {
+    private boolean validateTag(int tag) {
         return tag >= BOTTOM_BORDER_TAG && tag <= TOP_BORDER_TAG;
     }
 

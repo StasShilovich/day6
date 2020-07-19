@@ -6,13 +6,11 @@ import com.shilovich.day6.model.entity.CustomBookStorage;
 import com.shilovich.day6.model.dao.CustomBookListDao;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class CustomBookListDaoImpl implements CustomBookListDao {
     private static final int NOT_FOUND_INDEX = -1;
-
     private static CustomBookListDaoImpl instance;
 
     private CustomBookListDaoImpl() {
@@ -45,11 +43,10 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
     }
 
     @Override
-    public CustomBook findByTag(int tag) throws DaoException {
+    public CustomBook findByTag(int tag) {
         CustomBook result = new CustomBook();
         boolean isExist = false;
         int size = CustomBookStorage.getInstance().size();
-        checkStorage(size);
         for (int i = 0; i < size; i++) {
             CustomBook book = CustomBookStorage.getInstance().getBook(i);
             if (book.getTag() == tag) {
@@ -64,27 +61,46 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
     }
 
     @Override
-    public List<CustomBook> sortBookByTag() throws DaoException {
+    public List<CustomBook> sortBookByTag() {
+        List<CustomBook> list = collectUnsortedList();
+        list.sort(Comparator.comparing(CustomBook::getTag));
+        return list;
+    }
+
+    @Override
+    public List<CustomBook> sortBookByAuthor() {
+        List<CustomBook> list = collectUnsortedList();
+        list.sort(Comparator.comparing(CustomBook::getAuthor));
+        return list;
+    }
+
+    @Override
+    public List<CustomBook> sortBookByYear() {
+        List<CustomBook> list = collectUnsortedList();
+        list.sort(Comparator.comparing(CustomBook::getYear));
+        return list;
+    }
+
+    @Override
+    public List<CustomBook> sortBookByPrice() {
+        List<CustomBook> list = collectUnsortedList();
+        list.sort(Comparator.comparing(CustomBook::getPrice));
+        return list;
+    }
+
+    private List<CustomBook> collectUnsortedList() {
         CustomBookStorage storage = CustomBookStorage.getInstance();
-        checkStorage(storage.size());
         List<CustomBook> result = new ArrayList<>();
         for (int i = 0; i < storage.size(); i++) {
             CustomBook book = storage.getBook(i);
             result.add(book);
         }
-        Collections.sort(result, new Comparator<CustomBook>() {
-            @Override
-            public int compare(CustomBook book1, CustomBook book2) {
-                return book1.getTag() - book2.getTag();
-            }
-        });
         return result;
     }
 
     private int findCustomBookIndex(CustomBook book) throws DaoException {
         int index = NOT_FOUND_INDEX;
         int size = CustomBookStorage.getInstance().size();
-        checkStorage(size);
         for (int i = 0; i < size; i++) {
             CustomBook existBook = CustomBookStorage.getInstance().getBook(i);
             if (existBook.getTag() == book.getTag()) {
@@ -92,11 +108,5 @@ public class CustomBookListDaoImpl implements CustomBookListDao {
             }
         }
         return index;
-    }
-
-    private void checkStorage(int size) throws DaoException {
-        if (size == 0) {
-            throw new DaoException("Storage is empty!");
-        }
     }
 }

@@ -23,11 +23,11 @@ public class InvokeController<A, T, K> {
     public Map<A, T> processRequest(String command, Map<A, K> params) {
         Map<A, T> result = new HashMap();
         try {
-            ActionProvider<A, T, K> provider = new ActionProvider();
-            ActionCommand<A, T, K> actionCommand = provider.defineCommand(command);
+            ActionProvider provider = new ActionProvider();
+            ActionCommand actionCommand = provider.defineCommand(command);
             result = actionCommand.execute(params);
         } catch (ControllerException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return result;
     }

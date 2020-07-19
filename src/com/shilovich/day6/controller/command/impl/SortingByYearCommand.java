@@ -8,18 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SortingByTagCommand implements ActionCommand<String, List<CustomBook>, String> {
+public class SortingByYearCommand implements ActionCommand<String, List<CustomBook>, String> {
     private static final String SORT_BOOKS_RESP = "Books";
     private final CustomBookServiceImpl service;
 
-    public SortingByTagCommand() {
+    public SortingByYearCommand() {
         this.service = CustomBookServiceImpl.getInstance();
     }
 
     @Override
-    public Map<String, List<CustomBook>> execute(Map<String, String> parameters) {
+    public Map<String, List<CustomBook>> execute(Map<String, String> params) {
         List<CustomBook> customBooks;
-        customBooks = service.sortBookByTag();
+        customBooks = service.sortBookByYear();
         Map<String, List<CustomBook>> map = new HashMap<>();
         map.put(SORT_BOOKS_RESP, customBooks);
         return map;

@@ -1,6 +1,6 @@
 package com.shilovich.day6.exception;
 
-public class DaoException extends Exception{
+public class DaoException extends Exception {
     public DaoException() {
         super();
     }

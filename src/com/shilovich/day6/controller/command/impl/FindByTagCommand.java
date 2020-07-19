@@ -1,15 +1,13 @@
 package com.shilovich.day6.controller.command.impl;
 
 import com.shilovich.day6.controller.command.ActionCommand;
-import com.shilovich.day6.exception.ControllerException;
-import com.shilovich.day6.exception.ServiceException;
 import com.shilovich.day6.model.entity.CustomBook;
-import com.shilovich.day6.service.impl.CustomBookServiceImpl;
+import com.shilovich.day6.model.service.impl.CustomBookServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindByTagCommand implements ActionCommand<String, CustomBook, Integer> {
+public class FindByTagCommand implements ActionCommand<String, CustomBook, String> {
     private static final String TAG_REQ = "Tag";
     private static final String BOOK_RESP = "Book";
 
@@ -20,14 +18,9 @@ public class FindByTagCommand implements ActionCommand<String, CustomBook, Integ
     }
 
     @Override
-    public Map<String, CustomBook> execute(Map<String, Integer> parameters) throws ControllerException {
-        int tag = parameters.get(TAG_REQ);
-        CustomBook byTag;
-        try {
-            byTag = service.findByTag(tag);
-        } catch (ServiceException e) {
-            throw new ControllerException(e.getMessage());
-        }
+    public Map<String, CustomBook> execute(Map<String, String> parameters) {
+        String tag = parameters.get(TAG_REQ);
+        CustomBook byTag = service.findByTag(tag);
         Map<String, CustomBook> result = new HashMap<>();
         result.put(BOOK_RESP, byTag);
         return result;

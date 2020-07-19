@@ -29,8 +29,6 @@ public class TestStorageCreator {
                 1866, new BigDecimal("6.99")));
         books.add(new CustomBook(30741, "Jonathan Coe", "What a Carve Up!",
                 1944, new BigDecimal("14.89")));
-        books.add(new CustomBook(47965, "W.G. Sebald", "Vertigo",
-                1990, new BigDecimal("9.49")));
         storage.setBooks(books);
         return storage;
     }

@@ -10,7 +10,13 @@ public interface CustomBookListDao {
 
     void removeBook(CustomBook book) throws DaoException;
 
-    CustomBook findByTag(int tag) throws DaoException;
+    CustomBook findByTag(int tag);
 
-    List<CustomBook> sortBookByTag() throws DaoException;
+    List<CustomBook> sortBookByTag();
+
+    List<CustomBook> sortBookByAuthor();
+
+    List<CustomBook> sortBookByYear();
+
+    List<CustomBook> sortBookByPrice();
 }

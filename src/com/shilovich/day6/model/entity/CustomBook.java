@@ -64,9 +64,7 @@ public class CustomBook {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof CustomBook)) return false;
-
         CustomBook that = (CustomBook) o;
-
         if (getTag() != that.getTag()) return false;
         if (getYear() != that.getYear()) return false;
         if (getAuthor() != null ? !getAuthor().equals(that.getAuthor()) : that.getAuthor() != null) return false;

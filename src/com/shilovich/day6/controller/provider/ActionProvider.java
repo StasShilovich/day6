@@ -5,8 +5,8 @@ import com.shilovich.day6.controller.command.type.CommandType;
 import com.shilovich.day6.controller.command.impl.EmptyCommand;
 import com.shilovich.day6.exception.ControllerException;
 
-public class ActionProvider<A, T, K> {
-    public ActionCommand<A, T, K> defineCommand(String command) throws ControllerException {
+public class ActionProvider {
+    public ActionCommand defineCommand(String command) throws ControllerException {
         if (command.isEmpty()) {
             return new EmptyCommand();
         }
